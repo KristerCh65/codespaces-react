@@ -35,9 +35,9 @@ export class SearchForm extends Component {
                     placeholder="Movie to search.."
                 />
                 </div>
-                <hr/>
+                <br/>
                 <div className="control">
-                <button className="button is-info">Search</button>
+                <button className="play is-info">Search</button>
                 </div>
             </div>
         </form>

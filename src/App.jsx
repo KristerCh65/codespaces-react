@@ -31,8 +31,8 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <header className="App-header">
-          <Title>Search Movies</Title>
+        <header className="app-header">
+          <Title className="strong">Search Movies</Title>
           <div className='Searchfrom-wrapper'>
             <SearchForm onResults={this._handleResults}/>
           </div>
