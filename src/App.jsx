@@ -1,29 +1,49 @@
+import logo from './logo.svg';
 import './App.css';
+import './index.css';
+import {Title} from './components/Title'
+import { SearchForm } from './components/searchForm';
+import React, { Component } from 'react';
+import { MoviesList } from './components/MoviesList';
+import {Details} from './Pages/Details'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.jsx</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  state = { usedSearch: false, results: []}
+
+  _handleResults = (results) => {
+    this.setState({results, usedSearch: true})
+  }
+
+  _renderResults(){
+    return this.state.results.length===0 
+    ?  <p>Sorry! Results don't found</p> 
+      : <MoviesList movies={this.state.results}/>
+      
+  }
+
+
+  render(){
+    const url = new URL(document.location)
+    const hasId = url.searchParams.has(`id`)
+    if(hasId){
+      return < Details/>
+    }
+    return (
+      <div className="App">
+        <header className="App-header">
+          <Title>Search Movies</Title>
+          <div className='Searchfrom-wrapper'>
+            <SearchForm onResults={this._handleResults}/>
+          </div>
+          {this.state.usedSearch? this._renderResults(): 
+          <small>Use the form to search movie</small>}
+        </header>
+      </div>
+    );
+  }
+
+  
 }
 
 export default App;
